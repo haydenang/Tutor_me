@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:tutor_me/Screens/registrationPage.dart';
 
 class LoginPage extends StatelessWidget{
   @override
@@ -111,7 +112,9 @@ class _LoginWidgetState extends State<LoginWidget>{
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Don't have an account?"),
-                      GestureDetector(onTap: (){},
+                      GestureDetector(onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegistrationPage()));
+                      },
                       child: Text("SignUp", style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold, fontSize: 15,),))
                     ],
                   )
