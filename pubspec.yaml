@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/icons8-login-60.png
     - assets/icons8-login-30.png
+    - assets/icons8-graduation-64.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
