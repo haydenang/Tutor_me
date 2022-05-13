@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:tutor_me/Screens/homePage.dart';
 import 'package:tutor_me/Screens/registrationPage.dart';
 
@@ -154,7 +155,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => HomePage()));
+                                      builder: (context) => ClassesEnrolled()));
                             },
                             child: Text(
                               " Here",
