@@ -1,7 +1,6 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:tutor_me/Screens/loginPage.dart';
 
@@ -137,6 +136,41 @@ class _RegistrationPageState extends State<RegistrationPage> {
                 print('Error ${error.toString()}');
                 throw NullThrownError();
               })
+            }
+          else if (emailEditingController.text.isEmpty)
+            {
+              Fluttertoast.showToast(
+                  msg: "Please fill in your Email",
+                  gravity: ToastGravity.BOTTOM,
+                  toastLength: Toast.LENGTH_SHORT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.grey,
+                  textColor: Colors.black87,
+                  fontSize: 16)
+            }
+          else if (firstNameEditingController.text.isEmpty ||
+              secondNameEditingController.text.isEmpty)
+            {
+              Fluttertoast.showToast(
+                  msg: "Please fill in your Name/Surname",
+                  gravity: ToastGravity.BOTTOM,
+                  toastLength: Toast.LENGTH_SHORT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.grey,
+                  textColor: Colors.black87,
+                  fontSize: 16)
+            }
+          else if (passwordEditingController.text !=
+              confirmPasswordEditingController.text)
+            {
+              Fluttertoast.showToast(
+                  msg: "Passwords do not match!",
+                  gravity: ToastGravity.BOTTOM,
+                  toastLength: Toast.LENGTH_SHORT,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.grey,
+                  textColor: Colors.black87,
+                  fontSize: 16)
             }
         },
         child: Text(

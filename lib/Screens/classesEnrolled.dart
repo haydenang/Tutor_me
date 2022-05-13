@@ -1,6 +1,7 @@
 import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:tutor_me/Screens/loginPage.dart';
@@ -74,6 +75,14 @@ _addTaskBar(BuildContext context) {
                 ),
                 onPressed: () {
                   FirebaseAuth.instance.signOut().then((value) {
+                    Fluttertoast.showToast(
+                        msg: "Successfully Logged Out",
+                        gravity: ToastGravity.BOTTOM,
+                        toastLength: Toast.LENGTH_SHORT,
+                        timeInSecForIosWeb: 1,
+                        backgroundColor: Colors.grey,
+                        textColor: Colors.black87,
+                        fontSize: 16);
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   });
