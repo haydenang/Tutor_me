@@ -1,4 +1,8 @@
+import 'dart:developer';
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:tutor_me/Screens/loginPage.dart';
 
 class RegistrationPage extends StatefulWidget {
@@ -72,6 +76,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
 
     final passwordField = TextFormField(
       autofocus: false,
+      obscureText: true,
       controller: passwordEditingController,
       keyboardType: TextInputType.emailAddress,
       //validator: (){},
@@ -82,12 +87,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
       decoration: InputDecoration(
           prefixIcon: Icon(Icons.vpn_key),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-          hintText: "Password",
+          hintText: "Password, Min 6 Characters Long",
           border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
 
     final confirmField = TextFormField(
       autofocus: false,
+      obscureText: true,
       controller: confirmPasswordEditingController,
       keyboardType: TextInputType.emailAddress,
       //validator: (){},
@@ -111,7 +117,28 @@ class _RegistrationPageState extends State<RegistrationPage> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {},
+        onPressed: () => {
+          if (emailEditingController.text.isNotEmpty &&
+              firstNameEditingController.text.isNotEmpty &&
+              secondNameEditingController.text.isNotEmpty &&
+              passwordEditingController.text ==
+                  confirmPasswordEditingController.text &&
+              passwordEditingController.text.isNotEmpty)
+            {
+              FirebaseAuth.instance
+                  .createUserWithEmailAndPassword(
+                      email: emailEditingController.text,
+                      password: passwordEditingController.text)
+                  .then((value) {
+                print("Successfully created Account");
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ClassesEnrolled()));
+              }).onError((error, stackTrace) {
+                print('Error ${error.toString()}');
+                throw NullThrownError();
+              })
+            }
+        },
         child: Text(
           "Register",
           textAlign: TextAlign.center,

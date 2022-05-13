@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:tutor_me/Screens/homePage.dart';
@@ -69,7 +70,18 @@ class _LoginWidgetState extends State<LoginWidget> {
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: () {},
+        onPressed: () {
+          FirebaseAuth.instance
+              .signInWithEmailAndPassword(
+                  email: emailController.text,
+                  password: passwordController.text)
+              .then((value) {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => ClassesEnrolled()));
+          }).onError((error, stackTrace) {
+            print("Error ${error.toString()}");
+          });
+        },
         child: Text(
           "Login",
           textAlign: TextAlign.center,
