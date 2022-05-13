@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1028611566750",
+    "project_id": "tutorme-ef9d8",
+    "storage_bucket": "tutorme-ef9d8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1028611566750:android:05cb903bd4e7c5b1815f8f",
+        "android_client_info": {
+          "package_name": "com.example.tutor_me"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1028611566750-9a5khm96ohfokuvmcn636vsd2jn7f7rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDMFkRqA-Tt_gGISxB_JjTORuSYaP6YzQE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1028611566750-9a5khm96ohfokuvmcn636vsd2jn7f7rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

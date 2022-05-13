@@ -39,6 +39,8 @@ dependencies:
   google_fonts:
   date_picker_timeline:
   flutter_native_timezone:
+  firebase_database:
+  firebase_auth: ^3.3.17
 
 
 dev_dependencies:

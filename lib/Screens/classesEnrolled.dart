@@ -66,7 +66,7 @@ _addDateBar(){
         initialSelectedDate:DateTime.now(),
         selectionColor: Colors.blueAccent,
         selectedTextColor: Colors.white,
-        dateTextStyle: TextStyle(
+        dateTextStyle: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: Colors.grey,
@@ -76,7 +76,7 @@ _addDateBar(){
 }
 TextStyle get subHeadingStyle{
   return GoogleFonts.lato(
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize:24,
         fontWeight: FontWeight.bold,
         color: Colors.grey,
@@ -84,9 +84,18 @@ TextStyle get subHeadingStyle{
 }
 TextStyle get headingStyle{
   return GoogleFonts.lato(
-      textStyle: TextStyle(
+      textStyle: const TextStyle(
         fontSize:30,
         fontWeight: FontWeight.bold,
+        color: Colors.black,
+      ));
+}
+
+TextStyle get subTitleStyle {
+  return GoogleFonts.lato(
+      textStyle: const TextStyle(
+        fontSize: 14,
+        fontWeight: FontWeight.w400,
         color: Colors.black,
       ));
 }
