@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
+import 'package:tutor_me/Screens/homePage.dart';
 import 'package:tutor_me/Screens/registrationPage.dart';
 
-class LoginPage extends StatelessWidget{
+class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -18,9 +18,9 @@ class LoginWidget extends StatefulWidget {
   _LoginWidgetState createState() => _LoginWidgetState();
 }
 
-class _LoginWidgetState extends State<LoginWidget>{
+class _LoginWidgetState extends State<LoginWidget> {
   //form key
-  final _formKey= GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
 
   //editing controller
   final TextEditingController emailController = new TextEditingController();
@@ -34,39 +34,33 @@ class _LoginWidgetState extends State<LoginWidget>{
       controller: emailController,
       keyboardType: TextInputType.emailAddress,
       //validator: (){},
-      onSaved: (value){
-        emailController.text =  value!;
+      onSaved: (value) {
+        emailController.text = value!;
       },
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(
-        prefixIcon: Icon(Icons.mail),
-        contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
-        hintText: "Email",
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(10)
-        )
-      ),
+          prefixIcon: Icon(Icons.mail),
+          contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
+          hintText: "Email",
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
     final passwordField = TextFormField(
       autofocus: false,
       obscureText: true,
       controller: passwordController,
       //validator: (){},
-      onSaved: (value){
-        passwordController.text =  value!;
+      onSaved: (value) {
+        passwordController.text = value!;
       },
       textInputAction: TextInputAction.done,
       decoration: InputDecoration(
           prefixIcon: Icon(Icons.vpn_key_off_outlined),
           contentPadding: EdgeInsets.fromLTRB(20, 15, 20, 15),
           hintText: "Password",
-          border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10)
-          )
-      ),
+          border: OutlineInputBorder(borderRadius: BorderRadius.circular(10))),
     );
 
-    final loginButton =  Material(
+    final loginButton = Material(
       elevation: 5,
       borderRadius: BorderRadius.circular(16),
       color: Colors.blueAccent,
@@ -74,10 +68,13 @@ class _LoginWidgetState extends State<LoginWidget>{
       child: MaterialButton(
         padding: EdgeInsets.fromLTRB(20, 15, 20, 15),
         minWidth: MediaQuery.of(context).size.width,
-        onPressed: (){},
-        child: Text("Login",
-        textAlign: TextAlign.center,
-        style: TextStyle(fontSize: 20,color: Colors.white60,fontWeight: FontWeight.bold),),
+        onPressed: () {},
+        child: Text(
+          "Login",
+          textAlign: TextAlign.center,
+          style: TextStyle(
+              fontSize: 20, color: Colors.white60, fontWeight: FontWeight.bold),
+        ),
       ),
     );
 
@@ -94,31 +91,78 @@ class _LoginWidgetState extends State<LoginWidget>{
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  SizedBox(height: 60, child: Text('Material Login',style: TextStyle(fontSize: 40,color:Colors.green),),),
                   SizedBox(
-                    height: 100,
-                    child: Image.asset("assets/icons8-graduation-64.png",
-                    fit: BoxFit.fill,
-                  )),
+                    height: 60,
+                    child: Text(
+                      'Material Login',
+                      style: TextStyle(fontSize: 40, color: Colors.green),
+                    ),
+                  ),
+                  SizedBox(
+                      height: 100,
+                      child: Image.asset(
+                        "assets/icons8-graduation-64.png",
+                        fit: BoxFit.fill,
+                      )),
                   //Email Field SizedBox
-                  SizedBox(height: 45,),
+                  SizedBox(
+                    height: 45,
+                  ),
                   emailField,
-                  SizedBox(height: 25,),
+                  SizedBox(
+                    height: 25,
+                  ),
                   passwordField,
-                  SizedBox(height: 35,),
+                  SizedBox(
+                    height: 35,
+                  ),
                   loginButton,
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text("Don't have an account?"),
-                      GestureDetector(onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>RegistrationPage()));
-                      },
-                      child: Text("SignUp", style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold, fontSize: 15,),))
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => RegistrationPage()));
+                          },
+                          child: Text(
+                            " SignUp",
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ))
                     ],
-                  )
-
+                  ),
+                  SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text("Click here to Skip to homePage!"),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
+                          },
+                          child: Text(
+                            " Here",
+                            style: TextStyle(
+                              color: Colors.red,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          )),
+                    ],
+                  ),
                 ],
               ),
             ),

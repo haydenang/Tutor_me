@@ -14,6 +14,7 @@ class _RegistrationPageState extends State<RegistrationPage>{
     // TODO: implement build
     return Container(
       color: Colors.white,
+      child: Text("RegisterPage"),
     );
   }
 }
