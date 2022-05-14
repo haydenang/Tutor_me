@@ -4,6 +4,8 @@ import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:tutor_me/Screens/homePage.dart';
 import 'package:tutor_me/Screens/registrationPage.dart';
 
+import '../listing.dart';
+
 class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -167,7 +169,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ClassesEnrolled()));
+                                      builder: (context) => Listing()));
                             },
                             child: Text(
                               " Here",
