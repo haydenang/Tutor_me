@@ -1,7 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-void main()  {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyUpload());
 }
 
@@ -75,6 +78,7 @@ class _MyUploadState extends State<MyUpload> {
         ),
         OutlinedButton(onPressed: () {
           if(namecontroller.text.isNotEmpty && sizecontroller.text.isNotEmpty && datecontroller.text.isNotEmpty && locationcontroller.text.isNotEmpty && timecontroller.text.isNotEmpty){
+            print("Adding data.....");
             insertData(namecontroller.text, sizecontroller.text, datecontroller.text, locationcontroller.text, timecontroller.text);
           }}, child: Text(
           "Add Class",
