@@ -6,7 +6,7 @@ import 'package:tutor_me/upload.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyUpload());
+  runApp(LoginPage());
 }
 
 class MyApp extends StatelessWidget {
