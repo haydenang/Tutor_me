@@ -92,7 +92,7 @@ class _MyUploadState extends State<MyUpload> {
   }
 
   Future<void> insertData(String name, String size, String date, String location, String time) async {
-    await FirebaseFirestore.instance.collection("listing").doc('default').set({
+    await FirebaseFirestore.instance.collection("listing").doc().set({
       "name": name,
       "size": size,
       "date": date,
