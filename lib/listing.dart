@@ -18,7 +18,7 @@ class _ListingState extends State<Listing> {
           return Text('Loading...');
         }
         return ListView.builder(itemBuilder: (context, index) {
-          String itemTitle = snapshot.data!.docs[index]['className'];
+          String itemTitle = snapshot.data!.docs[index]['name'];
           return CardItem(itemTitle: itemTitle,);
         });
       },
