@@ -7,6 +7,7 @@ class MyUser {
   String password = "";
   String uid = "";
   String profilePic = "";
+  List<String> enrolledClasses = [];
 
   MyUser(String firstname, String surname, String email, String password,
       String uid) {
@@ -81,7 +82,8 @@ class MyUser {
         email = snapshot.data()?["email"],
         password = snapshot.data()?["password"],
         uid = snapshot.data()?["uid"],
-        profilePic = snapshot.data()?["profilePic"];
+        profilePic = snapshot.data()?["profilePic"],
+        enrolledClasses = snapshot.data()?["enrolledClasses"];
 
   Map<String, dynamic> toFirestore() {
     return {
@@ -90,7 +92,8 @@ class MyUser {
       if (getEmail() != null) "email": getEmail(),
       if (getPassword() != null) "password": getPassword(),
       if (getUID() != null) "uid": getUID(),
-      if (getPic() != null) "profilePic": getPic()
+      if (getPic() != null) "profilePic": getPic(),
+      if (enrolledClasses != null) "enrolledClasses": enrolledClasses
     };
   }
 }
