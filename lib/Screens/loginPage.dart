@@ -169,6 +169,28 @@ class _LoginWidgetState extends State<LoginWidget> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
+                                      builder: (context) => ClassesEnrolled()));
+                            },
+                            child: Text(
+                              " Here",
+                              style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                            )),
+                      ],
+                    ),
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text("Click here to Skip to uploadPage!"),
+                        GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
                                       builder: (context) => MyUpload()));
                             },
                             child: Text(
