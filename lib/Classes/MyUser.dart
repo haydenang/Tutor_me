@@ -34,7 +34,7 @@ class MyUser {
   }
 
   String getEmail() {
-    return this.firstname;
+    return this.email;
   }
 
   void setEmail(String email) {
