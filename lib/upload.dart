@@ -1,9 +1,13 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tutor_me/input_field.dart';
+
+import 'Classes/MyUser.dart';
+import 'Screens/classesEnrolled.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -128,6 +132,8 @@ class _MyUploadState extends State<MyUpload> {
                   print("Adding data.....");
                   insertData(namecontroller.text, sizecontroller.text,
                       locationcontroller.text);
+                  Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                      ClassesEnrolled()));
                 }
               }, child: Text(
                 "Add Class",
@@ -141,7 +147,15 @@ class _MyUploadState extends State<MyUpload> {
   }
   Future<void> insertData(String name, String size,
       String location) async {
+    final ref = FirebaseFirestore.instance.collection("users").doc(FirebaseAuth.instance.currentUser!.uid).
+    withConverter(
+      fromFirestore: MyUser.FromFirestore,
+      toFirestore: (MyUser user, _) => user.toFirestore(),);
+    final docSnap = await ref.get();
+    final user = docSnap.data();
     await FirebaseFirestore.instance.collection("listing").doc().set({
+      "uid":FirebaseAuth.instance.currentUser!.uid,
+      "tutorName": user?.getFirstName(),
       "name": name,
       "size": size,
       "date": _selectedDate,
@@ -150,6 +164,7 @@ class _MyUploadState extends State<MyUpload> {
       "end time": _endTime,
     });
   }
+
   _getDateFromUser(context) async {
     DateTime? _pickDate = await showDatePicker(
         context: context,
