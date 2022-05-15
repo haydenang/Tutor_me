@@ -11,7 +11,9 @@ class Listing extends StatefulWidget {
 class _ListingState extends State<Listing> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return Scaffold(
+      appBar: AppBar(title: Text("View Listings"),),
+      body: StreamBuilder<QuerySnapshot>(
       stream: widget._firestore.collection('listing').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData){
@@ -24,6 +26,7 @@ class _ListingState extends State<Listing> {
           return CardItem(itemTitle: itemTitle,);
         });
       },
+    ),
     );
   }
 }
