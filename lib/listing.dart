@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tutor_me/listingModel.dart';
+import 'package:tutor_me/viewListing.dart';
 
 class Listing extends StatefulWidget {
   FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -17,15 +19,34 @@ class _ListingState extends State<Listing> {
         if (!snapshot.hasData){
           return Text('Loading...');
         }
+<<<<<<< Updated upstream
         return ListView.builder(itemBuilder: (context, index) {
           String itemTitle = snapshot.data!.docs[index]['name'];
           return CardItem(itemTitle: itemTitle,);
+=======
+        return ListView.builder(
+          itemCount: snapshot.data?.docs.length, //QuerySnapshot.size,
+          itemBuilder: (context, index) {
+          return Card(
+            child: ListTile(
+              title: Text(snapshot.data!.docs[index]['name']),
+              leading: const SizedBox(
+                width: 50,
+                height: 50,
+              ),
+              onTap: (){
+                ListingModel listingModel2 = new ListingModel(snapshot.data!.docs[index]['name'], snapshot.data!.docs[index]['date'], snapshot.data!.docs[index]['location'], snapshot.data!.docs[index]['size'], snapshot.data!.docs[index]['time']);
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>viewListing(listingModel: listingModel2, )));
+              },
+            ),);
+>>>>>>> Stashed changes
         });
       },
     );
   }
 }
 
+<<<<<<< Updated upstream
 class CardItem extends StatefulWidget {
   String itemTitle;
   CardItem({required this.itemTitle});
@@ -50,3 +71,5 @@ class _CardItemState extends State<CardItem> {
     );
   }
 }
+=======
+>>>>>>> Stashed changes
