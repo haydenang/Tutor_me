@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tutor_me/Classes/MyUser.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -130,12 +131,15 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       password: passwordEditingController.text)
                   .then((value) {
                 if (value != null && value.user != null) {
-                  insertData(
+                  MyUser newUser = new MyUser(
                       firstNameEditingController.text,
                       secondNameEditingController.text,
                       emailEditingController.text,
                       passwordEditingController.text,
                       value.user!.uid);
+
+                  insertData(newUser, value.user!.uid);
+
                   print("Successfully created Account");
                   Navigator.push(
                       context,
@@ -261,15 +265,13 @@ class _RegistrationPageState extends State<RegistrationPage> {
     );
   }
 
-  Future<void> insertData(String firstName, String surname, String email,
-      String password, String uid) async {
-    await FirebaseFirestore.instance.collection("Users").doc("${uid}").set({
-      "firstName": firstName,
-      "surname": surname,
-      "email": email,
-      "password": password,
-      "profilePic": "",
-      "uid": uid
-    });
+  Future<void> insertData(MyUser user, String uid) async {
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .withConverter(
+            fromFirestore: MyUser.FromFirestore,
+            toFirestore: (MyUser user, options) => user.toFirestore())
+        .doc("${uid}")
+        .set(user);
   }
 }
