@@ -8,7 +8,7 @@ import 'package:tutor_me/upload.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(LoginPage()),);
+  runApp(MaterialApp(home: LoginPage()));
 
 }
 
