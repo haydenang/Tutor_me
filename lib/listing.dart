@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tutor_me/ListingClass.dart';
+import 'package:tutor_me/Classes/ListingClass.dart';
 import 'package:tutor_me/viewListing.dart';
 
 class Listing extends StatefulWidget {
@@ -13,7 +13,10 @@ class Listing extends StatefulWidget {
 class _ListingState extends State<Listing> {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<QuerySnapshot>(
+    return Scaffold(
+      appBar: AppBar(title: Text("View Listings"),),
+      body:
+      StreamBuilder<QuerySnapshot>(
       stream: widget._firestore.collection('listing').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData){
@@ -30,13 +33,14 @@ class _ListingState extends State<Listing> {
                 height: 50,
               ),
               onTap: (){
-                ListingClass listingclass = new ListingClass(snapshot.data!.docs[index]['name'], snapshot.data!.docs[index]['date'], snapshot.data!.docs[index]['location'], snapshot.data!.docs[index]['size'], snapshot.data!.docs[index]['start time'], snapshot.data!.docs[index]['end time']);
+                ListingClass listingclass = new ListingClass(snapshot.data!.docs[index]['name'], snapshot.data!.docs[index]['tutorName'],  snapshot.data!.docs[index]['date'], snapshot.data!.docs[index]['location'], snapshot.data!.docs[index]['size'], snapshot.data!.docs[index]['start time'], snapshot.data!.docs[index]['end time']);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>viewListing(listingclass: listingclass, )));
               },
             ),);
         });
       },
-    );
+    ));
+    
   }
 }
 
