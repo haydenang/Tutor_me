@@ -17,7 +17,9 @@ class _ListingState extends State<Listing> {
         if (!snapshot.hasData){
           return Text('Loading...');
         }
-        return ListView.builder(itemBuilder: (context, index) {
+        return ListView.builder(
+          itemCount: snapshot.data?.docs.length, //QuerySnapshot.size,
+          itemBuilder: (context, index) {
           String itemTitle = snapshot.data!.docs[index]['name'];
           return CardItem(itemTitle: itemTitle,);
         });
@@ -40,12 +42,6 @@ class _CardItemState extends State<CardItem> {
     return Card(
       child: ListTile(
         title: Text(widget.itemTitle),
-        trailing: Checkbox(
-          value: isChecked,
-          onChanged: (bool) {
-            isChecked = !isChecked;
-          },
-        ),
       ),
     );
   }
