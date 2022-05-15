@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:tutor_me/ListingModel.dart';
+import 'package:tutor_me/ListingClass.dart';
 
 
 class viewListing extends StatelessWidget {
-  final ListingModel listingModel;
-  const viewListing({Key? key, required this.listingModel}) : super(key: key);
+  final ListingClass listingclass;
+  const viewListing({Key? key, required this.listingclass}) : super(key: key);
 
   @override
   Widget build(BuildContext context){
     return Scaffold(
-      appBar: AppBar(title: Text(listingModel.name),),
+      appBar: AppBar(title: Text(listingclass.name),),
       body: Column(
         children: [
-          Text(listingModel.time)
+          Text(listingclass.time)
         ],),
     );
   }
