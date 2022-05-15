@@ -5,10 +5,8 @@ import 'package:tutor_me/Screens/classesEnrolled.dart';
 import 'package:tutor_me/Screens/homePage.dart';
 import 'package:tutor_me/Screens/registrationPage.dart';
 
-
 import '../listing.dart';
 import '../upload.dart';
-
 
 class LoginPage extends StatelessWidget {
   @override
@@ -114,8 +112,9 @@ class _LoginWidgetState extends State<LoginWidget> {
                     SizedBox(
                       height: 60,
                       child: Text(
-                        'Material Login',
-                        style: TextStyle(fontSize: 40, color: Colors.green),
+                        'TutorMe',
+                        style:
+                            TextStyle(fontSize: 40, color: Colors.blueAccent),
                       ),
                     ),
                     SizedBox(
@@ -163,50 +162,50 @@ class _LoginWidgetState extends State<LoginWidget> {
                             ))
                       ],
                     ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Click here to Skip to homePage!"),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => Listing()));
-                            },
-                            child: Text(
-                              " Here",
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            )),
-                      ],
-                    ),
-                    SizedBox(height: 20),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text("Click here to Skip to cameraPage!"),
-                        GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => cameraPage()));
-                            },
-                            child: Text(
-                              " Here",
-                              style: TextStyle(
-                                color: Colors.red,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                            )),
-                      ],
-                    ),
+                    // SizedBox(height: 20),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: <Widget>[
+                    //     Text("Click here to Skip to homePage!"),
+                    //     GestureDetector(
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                   builder: (context) => Listing()));
+                    //         },
+                    //         child: Text(
+                    //           " Here",
+                    //           style: TextStyle(
+                    //             color: Colors.red,
+                    //             fontWeight: FontWeight.bold,
+                    //             fontSize: 15,
+                    //           ),
+                    //         )),
+                    //   ],
+                    // ),
+                    // SizedBox(height: 20),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: <Widget>[
+                    //     Text("Click here to Skip to listingPage!"),
+                    //     GestureDetector(
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //               context,
+                    //               MaterialPageRoute(
+                    //                   builder: (context) => Listing()));
+                    //         },
+                    //         child: Text(
+                    //           " Here",
+                    //           style: TextStyle(
+                    //             color: Colors.red,
+                    //             fontWeight: FontWeight.bold,
+                    //             fontSize: 15,
+                    //           ),
+                    //         )),
+                    //   ],
+                    // ),
                   ],
                 ),
               ),

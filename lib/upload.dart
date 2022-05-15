@@ -188,7 +188,7 @@ class _MyUploadState extends State<MyUpload> {
         lastDate: DateTime(2024));
     if (_pickDate != null) {
       setState(() {
-        _selectedDate = DateFormat('dd/MM/yyyy').format(_pickDate);
+        _selectedDate = DateFormat('yyyy-MM-dd').format(_pickDate);
       });
     } else {
       print("NULL date");
