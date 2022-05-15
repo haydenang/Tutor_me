@@ -1,11 +1,15 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:tutor_me/Screens/classesEnrolled.dart';
-import 'package:tutor_me/input_field.dar.dart';
 
-import 'button.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:tutor_me/input_field.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp( MyUpload());
+}
 
 class MyUpload extends StatefulWidget {
   const MyUpload({Key? key}) : super(key: key);
@@ -15,160 +19,179 @@ class MyUpload extends StatefulWidget {
 }
 
 class _MyUploadState extends State<MyUpload> {
-  final TextEditingController _titleController = TextEditingController();
-  final TextEditingController _locationController = TextEditingController();
-  final TextEditingController _sizeController = TextEditingController();
-
-  DateTime _selectedDate = DateTime.now();
-  String _startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
-  String _endTime = "10:30 PM";
-
-  final DatabaseRef = FirebaseDatabase.instance.reference();
+  var namecontroller = new TextEditingController();
+  var sizecontroller = new TextEditingController();
+  var datecontroller = new TextEditingController();
+  var locationcontroller = new TextEditingController();
+  var timecontroller = new TextEditingController();
+  String _selectedDate = "  Date";
+  //DateTime.now();
+  String _startTime = "   Start Time";
+  //DateFormat("hh:mm a").format(DateTime.now()).toString();
+  String _endTime = "   End Time";
+      //"10:00 PM";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.lightBlue,
-      appBar: AppBar(),
-      body: Container(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+    return MaterialApp(
+        home:Scaffold(
+          resizeToAvoidBottomInset: false,
+          body: Builder(builder: (context)=>
+              Column(children: [
               Text(
-                "Add Class",
-                style: headingStyle,
+                "Add Classes",
+                style: TextStyle(fontSize: 28),
               ),
-              MyInputField(title: "Title",
-                  hint: "Enter the name of your class",
-                  widget: widget, controller: _titleController,),
-              MyInputField(title: "Location",
-                  hint: "Enter the Location",
-                  widget: widget,controller: _locationController,),
-              MyInputField(title: "Class size",
-                  hint: "Enter the class size",
-                  widget: widget, controller: _sizeController,),
-              MyInputField(
-                title: "Date", hint: DateFormat.yMd().format(_selectedDate),
-                widget: IconButton(
-                  icon: const Icon(Icons.calendar_today_outlined,
-                      color: Colors.grey),
-                  onPressed: () {
-                    _getDateFromUser();
-                  },
+              SizedBox(
+                height: 30,
+              ),
+              TextFormField(
+                controller: namecontroller,
+                decoration: InputDecoration(
+                    labelText: 'Class Name', border: OutlineInputBorder()),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              TextFormField(
+                controller: sizecontroller,
+                decoration: InputDecoration(
+                    labelText: 'Class Size', border: OutlineInputBorder()),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              // TextFormField(
+              //   controller: datecontroller,
+              //   decoration: InputDecoration(
+              //       labelText: 'Date', border: OutlineInputBorder()),
+              // ),
+              SizedBox(
+                height: 30,
+              ),
+              TextFormField(
+                controller: locationcontroller,
+                decoration: InputDecoration(
+                    labelText: 'Location', border: OutlineInputBorder()),
+              ),
+              SizedBox(
+                height: 30,
+              ),
+                MyInputField(
+                    title: "Date", hint: _selectedDate,
+                    widget: IconButton(
+                        icon: Icon(Icons.calendar_today_outlined),
+                        onPressed: () {
+                          _getDateFromUser(context);
+                        })),
+                SizedBox(
+                  height: 30,
                 ),
-              ),
               Row(
                 children: [
                   Expanded(
-                      child: MyInputField(title: "Start Time", hint: _startTime, widget: IconButton(
-                        onPressed: (){
-                          _getTimeFromUser(true);
-                        },
-                        icon: const Icon(
-                          Icons.access_time_rounded,
-                          color: Colors.grey,
-                        ),
-                      ) ,)),
-                  SizedBox(width: 12,),
+                      child: MyInputField(
+                          title: "Start Time",
+                          hint: _startTime,
+                        widget: IconButton(
+                          onPressed: (){
+                            _getTimeFromUser(context, true);
+                          },
+                          icon: Icon(Icons.access_time_filled_rounded,
+                          color: Colors.grey,)
+                        ),)),
+                  SizedBox(width:14),
                   Expanded(
-                      child: MyInputField(title: "End Time", hint: _endTime, widget: IconButton(
-                        onPressed: (){
-                          _getTimeFromUser(false);
-                        },
-                        icon: const Icon(
-                          Icons.access_time_rounded,
-                          color: Colors.grey,
-                        ),
-                      ) ,
-                      ),
-                  ),
-                ],
+                      child: MyInputField(
+                        title: "End Time",
+                        hint: _endTime,
+                        widget: IconButton(
+                            onPressed: (){
+                              _getTimeFromUser(context, false);
+                            },
+                            icon: Icon(Icons.access_time_filled_rounded,
+                              color: Colors.grey,)
+                        ),))
+                ],),
+              // TextFormField(
+              //   controller: timecontroller,
+              //   decoration: InputDecoration(
+              //       labelText: 'Time', border: OutlineInputBorder()),
+              // ),
+              SizedBox(
+                height: 50,
               ),
-              SizedBox(height: 18,),
-              Row(
-                children: [
-                  MyButton(label:"Create Class", onTap: ()=> _validateData())
-                    ],
-                  )
-                ],
+              OutlinedButton(onPressed: () {
+                if (namecontroller.text.isNotEmpty &&
+                    sizecontroller.text.isNotEmpty &&
+                    locationcontroller.text.isNotEmpty) {
+                  print("Adding data.....");
+                  insertData(namecontroller.text, sizecontroller.text,
+                      locationcontroller.text);
+                }
+              }, child: Text(
+                "Add Class",
+                style: TextStyle(fontSize: 18),
+              ))
+            ],
+            ),
           ),
-        )
-      )
+      ),
     );
   }
-
-  _getDateFromUser() async {
-    DateTime? _pickerDate = await showDatePicker(
+  Future<void> insertData(String name, String size,
+      String location) async {
+    await FirebaseFirestore.instance.collection("listing").doc().set({
+      "name": name,
+      "size": size,
+      "date": _selectedDate,
+      "location": location,
+      "start time": _startTime,
+      "end time": _endTime,
+    });
+  }
+  _getDateFromUser(context) async {
+    DateTime? _pickDate = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
-        firstDate: DateTime(2022),
-        lastDate: DateTime(2121)
+        firstDate: DateTime(2018),
+        lastDate: DateTime(2024)
     );
-    if (_pickerDate != null) {
+    if (_pickDate!=null){
       setState(() {
-        _selectedDate = _pickerDate;
+        _selectedDate = DateFormat('dd/MM/yyyy').format(_pickDate) ;
       });
-    }
-    else {
-      print("Its null or something is wrong");
+    } else{
+      print("NULL date");
     }
   }
-  _getTimeFromUser(bool isStartTime) async {
-    var pickedTime = await _showTimePicker();
-    String _formattedTime = pickedTime.format(context);
-    if(pickedTime == null){
-      print("Time cancelled");
-    }
-    else if(isStartTime == true){
+  _getTimeFromUser(context, isStartTime) async {
+    String startTime = DateFormat("hh:mm a").format(DateTime.now()).toString();
+    var pickTime = await showTimePicker(
+        context: context,
+      initialTime: TimeOfDay(
+          hour: int.parse(startTime.split(":")[0]),
+          minute:int.parse(startTime.split(":")[1].split(" ")[0])),
+      initialEntryMode: TimePickerEntryMode.input,
+    ) ;
+    // final localizations = MaterialLocalizations.of(context);
+    // final formattedTimeOfDay = localizations.formatTimeOfDay(pickTime);
+    String _formattedTime = pickTime!.format(context);
+    if (pickTime==null){
+        print("No time");
+    } else if (isStartTime){
       setState(() {
         _startTime = _formattedTime;
+        print(_startTime);
       });
-    }
-    else if(isStartTime == false){
+    } else if (!isStartTime){
       setState(() {
         _endTime = _formattedTime;
+        print(_endTime);
       });
     }
   }
 
-  _showTimePicker(){
-    return showTimePicker(
-        initialEntryMode: TimePickerEntryMode.input,
-        context: context,
-        initialTime: TimeOfDay(
-            hour: int.parse(_startTime.split(":")[0]),
-            minute: int.parse((_startTime.split(":")[1].split(" ")[0]),
-            )
-        )
-    );
-  }
 
-  _validateData(){
-    if(_titleController.text.isNotEmpty&&_locationController.text.isNotEmpty&&_sizeController.text.isNotEmpty){
-      _addUploadToDb(_titleController.text,_locationController.text,_sizeController.text,_selectedDate.toString(),_startTime.toString(),_endTime.toString());
-      Get.back();
-    }
-    else if(_titleController.text.isEmpty || _locationController.text.isEmpty || _sizeController.text.isEmpty){
-      Get.snackbar("Required", "All fields are required!",
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.white,
-          colorText: Colors.red,
-        icon: const Icon(Icons.warning_amber_rounded)
-      );
-    }
-  }
 
-  _addUploadToDb(String title, String location, String size, String date, String startTime, String endTime){
-    DatabaseRef.push().set({
-      "title": title,
-      "location": location,
-      "size": size,
-      "date": date,
-      "startTime" : startTime,
-      "endTime":endTime
-    });
-
-}
 }

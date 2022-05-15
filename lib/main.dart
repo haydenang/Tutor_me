@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tutor_me/Screens/loginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'listing.dart';
+
+import 'package:tutor_me/upload.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MaterialApp(home: Listing()),);
+  runApp(MaterialApp(LoginPage()),);
+
 }
 
 class MyApp extends StatelessWidget {

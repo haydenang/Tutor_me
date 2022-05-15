@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tutor_me/Screens/classesEnrolled.dart';
-import 'package:tutor_me/Screens/loginPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({Key? key}) : super(key: key);
@@ -129,9 +129,19 @@ class _RegistrationPageState extends State<RegistrationPage> {
                       email: emailEditingController.text,
                       password: passwordEditingController.text)
                   .then((value) {
-                print("Successfully created Account");
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => ClassesEnrolled()));
+                if (value != null && value.user != null) {
+                  insertData(
+                      firstNameEditingController.text,
+                      secondNameEditingController.text,
+                      emailEditingController.text,
+                      passwordEditingController.text,
+                      value.user!.uid);
+                  print("Successfully created Account");
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ClassesEnrolled()));
+                }
               }).onError((error, stackTrace) {
                 print('Error ${error.toString()}');
                 throw NullThrownError();
@@ -249,5 +259,17 @@ class _RegistrationPageState extends State<RegistrationPage> {
         ),
       ),
     );
+  }
+
+  Future<void> insertData(String firstName, String surname, String email,
+      String password, String uid) async {
+    await FirebaseFirestore.instance.collection("Users").doc("${uid}").set({
+      "firstName": firstName,
+      "surname": surname,
+      "email": email,
+      "password": password,
+      "profilePic": "",
+      "uid": uid
+    });
   }
 }
