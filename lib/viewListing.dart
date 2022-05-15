@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:tutor_me/ListingClass.dart';
+import 'package:tutor_me/Classes/ListingClass.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 
 main() {
   runApp(MaterialApp(
       home: viewListing(
-        listingclass: ListingClass("Algo","22-05-2022","Tampines",'20','730pm', '830pm'),)
+        listingclass: ListingClass("Algo", "prof", "22-05-2022","Tampines",'20','730pm', '830pm'),)
   ));
 }
 
@@ -32,6 +33,11 @@ class viewListing extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
+          Text("Tutor: " + listingclass.tutorName,
+                  style: subHeadingStyle),
+              const SizedBox(
+                height: 5,
+              ),
           Text("Date: " + listingclass.date,
               style: subHeadingStyle),
           const SizedBox(
@@ -45,7 +51,16 @@ class viewListing extends StatelessWidget {
           Text("Class size: " + listingclass.size,
               style: subHeadingStyle
           ),
+
+          ElevatedButton(
+                child: Text('Enroll for this'),
+                onPressed: () {
+                  
+                },
+              ),
+
         ],),
+        
 
     ));
   }
@@ -69,3 +84,6 @@ TextStyle get headingStyle {
         color: Colors.black,
       ));
 }
+
+
+
