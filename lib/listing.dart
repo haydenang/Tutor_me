@@ -30,7 +30,7 @@ class _ListingState extends State<Listing> {
                 height: 50,
               ),
               onTap: (){
-                ListingClass listingclass = new ListingClass(snapshot.data!.docs[index]['name'], snapshot.data!.docs[index]['date'], snapshot.data!.docs[index]['location'], snapshot.data!.docs[index]['size'], snapshot.data!.docs[index]['time']);
+                ListingClass listingclass = new ListingClass(snapshot.data!.docs[index]['name'], snapshot.data!.docs[index]['date'], snapshot.data!.docs[index]['location'], snapshot.data!.docs[index]['size'], snapshot.data!.docs[index]['start time'], snapshot.data!.docs[index]['end time']);
                 Navigator.of(context).push(MaterialPageRoute(builder: (context)=>viewListing(listingclass: listingclass, )));
               },
             ),);

@@ -7,7 +7,7 @@ import 'package:tutor_me/ListingClass.dart';
 main() {
   runApp(MaterialApp(
       home: viewListing(
-        listingclass: ListingClass("Algo","22-05-2022","Tampines",'20','730pm'),)
+        listingclass: ListingClass("Algo","22-05-2022","Tampines",'20','730pm', '830pm'),)
   ));
 }
 
@@ -32,7 +32,12 @@ class viewListing extends StatelessWidget {
           const SizedBox(
             height: 5,
           ),
-          Text("Date and Time: " + listingclass.date + "    " + listingclass.time,
+          Text("Date: " + listingclass.date,
+              style: subHeadingStyle),
+          const SizedBox(
+            height: 5,
+          ),
+          Text("Time: " + listingclass.start_time + " - " + listingclass.end_time,
               style: subHeadingStyle),
           const SizedBox(
             height: 5,
