@@ -6,6 +6,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:tutor_me/Screens/loginPage.dart';
 
+import '../upload.dart';
+
 // main() {
 //   runApp(MyClassesEnrolled());
 // }
@@ -35,8 +37,8 @@ class _ClassesEnrolledState extends State<ClassesEnrolled> {
   Widget build(BuildContext context) {
     // TODO: implement build
     //throw UnimplementedError();
-    return Scaffold(
-      body: Column(children: [
+    return  Scaffold(
+       body: Column(children: [
         _addTaskBar(context),
         _addDateBar(),
       ]),
@@ -87,6 +89,22 @@ _addTaskBar(BuildContext context) {
                         MaterialPageRoute(builder: (context) => LoginPage()));
                   });
                 }),
+            const SizedBox(
+              height: 40,
+            ),
+            OutlinedButton(onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) =>
+                const MyUpload()));
+            },
+              child: const Text(
+              " Add a class ",
+              style: TextStyle(
+                color: Colors.lightBlue,
+                fontWeight: FontWeight.bold,
+                fontSize: 15,
+              ),
+            ),
+            )
           ],
         ),
       ],
